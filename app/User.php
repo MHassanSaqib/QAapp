@@ -37,19 +37,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function questions()
+    public  function questions()
     {
         return $this->hasMany('App\Question');
-    }
-
-    public function answers()
-    {
-        return $this->hasMany('App\Answer');
-    }
-
-    public function votes()
-    {
-        return $this->morphMany('App\Vote', 'votable');
     }
 
 }

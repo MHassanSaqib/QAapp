@@ -6,13 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Answer extends Model
 {
-    public function User()
+    public function question()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\Question');
     }
 
-    public function votes()
-    {
-        return $this->morphMany('App\Vote', 'votable');
-    }
+
 }

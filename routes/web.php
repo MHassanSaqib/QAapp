@@ -10,8 +10,7 @@ Route::resource('questions', 'QuestionController');
 
 Route::resource('answers', 'AnswerController')
     ->except([
-        'show',
         'index',
+        'show',
         'create',
     ]);
-
