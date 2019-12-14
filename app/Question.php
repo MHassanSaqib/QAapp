@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Carbon\Carbon;
+
 class Question extends Model
 {
 
@@ -20,5 +22,10 @@ class Question extends Model
     public function answers()
     {
        return $this->hasMany('App\Answer');
+    }
+
+    public function getCreatedAtAttribute($value)
+    {
+        return Carbon::parse($value)->diffForHumans();
     }
 }

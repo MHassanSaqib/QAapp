@@ -42,4 +42,14 @@ class User extends Authenticatable
         return $this->hasMany('App\Question');
     }
 
+    // public function getNameAttribute($value)
+    // {
+    //     return ucwords($value);
+    // }
+
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = ucwords(strtolower($value));
+    }
+
 }
