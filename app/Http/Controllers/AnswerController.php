@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Answer;
 use Illuminate\Http\Request;
+use App\Question;
 
 class AnswerController extends Controller
 {
@@ -33,9 +34,11 @@ class AnswerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Question $question, Request $request)
     {
-        //
+        $answer = new Answer($request->all());
+        $question->answers()->save($question);
+        //auth()->user()->questions()->save($question);
     }
 
     /**

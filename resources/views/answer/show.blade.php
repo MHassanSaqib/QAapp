@@ -26,29 +26,13 @@
                             </span>
                         </div>
 
-                        <h2> Answers </h2>
 
-                        @foreach($question->answers as $answer)
-                            {{$answer->body}}
-                            <hr>
-                        @endforeach
-
-
-
-                        <br><hr>
                         <form method="POST" action="{{ route('answers.store') }}">
                             @include('answer._form', ['buttonName' => 'Submit Answer'])
                         </form>
-
-
-
                     </div>
                 </div>
-
             </div>
-
-
-
         </div>
     </div>
 </div>
