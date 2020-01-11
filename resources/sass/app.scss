@@ -4,5 +4,16 @@
 // Variables
 @import 'variables';
 
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
+$theme-colors: (
+    "primary": $purple
+);
+
+
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+

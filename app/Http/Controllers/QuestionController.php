@@ -10,14 +10,37 @@ class QuestionController extends Controller
 
     public function index()
     {
-        //
+
+        $type = request()->get('type');
+
+
+
+        if ($type == 'newest')
+            $questions = Question::latest()->paginate(3);
+
+        if ($type =='oldest')
+            $questions = Question::paginate(3);
+
+        if ($type == 'most voted')
+            $questions = Question::orderBy('vote_count', 'desc')->paginate(3);
+
+        if ($type == 'unanswered')
+            $questions = Question::doesntHave('answers')->paginate(3);
+
+        if ($type == 'answered')
+            $questions = Question::has('answers')->paginate(3);
+
+        else
+            $questions = Question::paginate(3);
+
+        return view('question.index', [
+            'questions' => $questions,
+        ]);
+
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+
     public function create()
     {
         return view('question.create');

@@ -6,6 +6,14 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-body">
+
+                    <div id="the-id" class="upvotejs">
+                        <a class="upvote upvote-on"></a>
+                        <span class="count">0</span>
+                        <a class="downvote"></a>
+                        <a class="star"></a>
+                    </div>
+
                     <div class="p-4">
                         <h1>
                             {{$question->title}}
@@ -37,7 +45,8 @@
 
                         <br><hr>
                         <form method="POST" action="{{ route('answers.store') }}">
-                            @include('answer._form', ['buttonName' => 'Submit Answer'])
+                            @include('answer._form', ['buttonName' => 'Submit Answer',
+                            'question' => $question])
                         </form>
 
 
@@ -53,3 +62,7 @@
     </div>
 </div>
 @endsection
+
+@push('styles')
+    <link href="{{ asset('vendor\upvotejs\upvotejs.css') }}" rel="stylesheet">
+@endpush

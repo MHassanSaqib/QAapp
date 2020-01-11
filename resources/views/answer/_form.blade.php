@@ -1,6 +1,6 @@
 @csrf
 
-
+<input type='hidden' name='question_id' value={{$question->id}} >
 
 <div class="form-group row">
     <label for="body" class="col-md-4 col-form-label text-md-right">Answer</label>
