@@ -13,25 +13,44 @@ class QuestionController extends Controller
 
         $type = request()->get('type');
 
+        $results_per_page = request()->has('results_per_page') ? request()->get('results_per_page') : 10;
+
+        $questions = Question::filterByType($type)->paginate($results_per_page);
 
 
-        if ($type == 'newest')
-            $questions = Question::latest()->paginate(3);
 
-        if ($type =='oldest')
-            $questions = Question::paginate(3);
+        // Homework, write your following if-else part with when() method
+        // and make relevant query scopes....
 
-        if ($type == 'most voted')
-            $questions = Question::orderBy('vote_count', 'desc')->paginate(3);
 
-        if ($type == 'unanswered')
-            $questions = Question::doesntHave('answers')->paginate(3);
 
-        if ($type == 'answered')
-            $questions = Question::has('answers')->paginate(3);
+        // $questions = Question::when($type == 'most voted', function ($query, $sortBy) {
+        //             return $query->mostVoted();
+        //         }, function ($query) {
+        //             return $query;
+        //         })->paginate(3);
 
-        else
-            $questions = Question::paginate(3);
+
+
+
+
+        // if ($type == 'newest')
+        //     $questions = Question::latest()->paginate(3);
+
+        // if ($type =='oldest')
+        //     $questions = Question::paginate(3);
+
+        // if ($type == 'most voted')
+        //     $questions = Question::orderBy('vote_count', 'desc')->paginate(3);
+
+        // if ($type == 'unanswered')
+        //     $questions = Question::doesntHave('answers')->paginate(3);
+
+        // if ($type == 'answered')
+        //     $questions = Question::has('answers')->paginate(3);
+
+        // else
+        //     $questions = Question::paginate(3);
 
         return view('question.index', [
             'questions' => $questions,

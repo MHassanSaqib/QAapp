@@ -28,4 +28,21 @@ class Question extends Model
     {
         return Carbon::parse($value)->diffForHumans();
     }
+
+    public function scopeMostVoted($query){
+        return $query->orderBy('vote_count', 'desc');
+    }
+
+    public function scopeUnaswered($query){
+        return $query->doesntHave('answers');
+    }
+
+    public function scopeFilterByType($query, $type){
+        return $query->when($type == 'most voted', function ($query, $sortBy) {
+                return $query->mostVoted();
+            }, function ($query) {
+                return $query;
+            });
+    }
+
 }
