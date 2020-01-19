@@ -6,33 +6,38 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-body">
-
-                    <div id="the-id" class="upvotejs">
-                        <a class="upvote upvote-on"></a>
-                        <span class="count">0</span>
-                        <a class="downvote"></a>
-                        <a class="star"></a>
-                    </div>
-
                     <div class="p-4">
-                        <h1>
-                            {{$question->title}}
-                        </h1>
-                        <hr>
-                        <p>
-                            {{$question->description}}
-                        </p>
+                        <div class="row">
+                            <div class="col-2">
+                                <vote-component
+                                    vote-count=3
+                                    :upvote-on="false"
+                                    :star-on="false"
+                                    downvote-on>
+                                </vote-component>
+                            </div>
+                            <div class="col-10">
+                                <h1>
+                                    {{$question->title}}
+                                </h1>
+                                <p>
+                                    {{$question->description}}
+                                </p>
 
 
-                        <div class="text-right">
-                            <span>
-                            Posted by: <strong> {{$question->user->name}} </strong> |
-                            </span>
+                                <div class="text-right">
+                                    <span>
+                                    Posted by: <strong> {{$question->user->name}} </strong> |
+                                    </span>
 
-                            <span>
-                                Posted: <strong>{{$question->created_at}}</strong>
-                            </span>
+                                    <span>
+                                        Posted: <strong>{{$question->created_at}}</strong>
+                                    </span>
+                                </div>
+                            </div>
                         </div>
+
+                        <br>
 
                         <h2> Answers </h2>
 
