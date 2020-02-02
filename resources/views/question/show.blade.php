@@ -12,10 +12,11 @@
 
                                 <vote-component
                                     vote-count={{$question->countTotalVotes()}}
-                                    :upvote-on={{auth()->user()->hasUpVoted($question) ? "true" : "false"}}
+                                    :upvote-on= @auth {{auth()->user()->hasUpVoted($question) ? "true" : "false"}} @else "false" @endauth
                                     :star-on="false"
                                     question-id= {{$question->id}}
-                                    :downvote-on={{auth()->user()->hasDownVoted($question) ? "true" : "false"}}>
+                                    :downvote-on= @auth {{auth()->user()->hasDownVoted($question) ? "true" : "false"}} @else "false" @endauth
+                                    >
                                 </vote-component>
 
                             </div>
