@@ -5,10 +5,11 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Jcc\LaravelVote\Vote;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, Vote;
 
     /**
      * The attributes that are mass assignable.
@@ -40,6 +41,11 @@ class User extends Authenticatable
     public  function questions()
     {
         return $this->hasMany('App\Question');
+    }
+
+    public  function answers()
+    {
+        return $this->hasMany('App\Answer');
     }
 
     // public function getNameAttribute($value)

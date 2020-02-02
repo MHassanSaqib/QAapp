@@ -2,22 +2,21 @@
 
 <input type='hidden' name='question_id' value={{$question->id}} >
 
-<div class="form-group row">
-    <label for="body" class="col-md-4 col-form-label text-md-right">Answer</label>
+<div class="form-group">
+    <label for="body">Answer</label>
 
-    <div class="col-md-6">
-        <textarea id="body" class="form-control @error('body') is-invalid @enderror" name="description"></textarea>
+        <textarea id="body" class="form-control @error('body') is-invalid @enderror" name="body"></textarea>
 
         @error('body')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
         @enderror
-    </div>
+
 </div>
 
-<div class="form-group row mb-0">
-    <div class="col-md-8 offset-md-4">
+<div class="form-group ">
+    <div>
         <button type="submit" class="btn btn-primary">
             {{ $buttonName }}
         </button>

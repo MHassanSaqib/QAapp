@@ -29,7 +29,8 @@
             voteCount: String,
             upvoteOn: Boolean,
             downvoteOn: Boolean,
-            starOn: Boolean
+            starOn: Boolean,
+            questionId: String
         },
         data() {
             return {
@@ -46,17 +47,21 @@
                 this.isStarOn = !this.isStarOn
             },
             onClickDownvote() {
-                this.isDownvoteOn = !this.isDownvoteOn
+                this.isDownvoteOn = !this.isDownvoteOn          // Assignment is still pending to implement the logic
                 this.votes = this.votes - 1
+                this.requestForVotedown()
             },
-            onClickUpvote() {
-                this.isUpvoteOn = !this.isUpvoteOn
+
+          onClickUpvote() {
+                this.isUpvoteOn = !this.isUpvoteOn              // assigment here too
                 this.votes = this.votes + 1
+                this.requestForVoteup()
+
             },
-            submitForm() {
-               axios.post('/formSubmit', {
-                    name: this.name,
-                    description: this.description
+
+            requestForVoteup() {
+                axios.post(this.questionId + '/upvote', {
+
                 })
                 .then(function (response) {
                     console.log('form is submitted')
@@ -65,8 +70,21 @@
                 .catch(function (error) {
                     console.log(error);
                 });;
+            },
 
+            requestForVotedown() {
+                axios.post(this.questionId + '/downvote', {
+
+                })
+                .then(function (response) {
+                    console.log('form is submitted')
+                    console.log( response.data)
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });;
             }
+
         },
         mounted() {
             console.log('Component mounted.')

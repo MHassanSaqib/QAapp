@@ -1901,7 +1901,8 @@ __webpack_require__.r(__webpack_exports__);
     voteCount: String,
     upvoteOn: Boolean,
     downvoteOn: Boolean,
-    starOn: Boolean
+    starOn: Boolean,
+    questionId: String
   },
   data: function data() {
     return {
@@ -1918,18 +1919,28 @@ __webpack_require__.r(__webpack_exports__);
       this.isStarOn = !this.isStarOn;
     },
     onClickDownvote: function onClickDownvote() {
-      this.isDownvoteOn = !this.isDownvoteOn;
+      this.isDownvoteOn = !this.isDownvoteOn; // Assignment is still pending to implement the logic
+
       this.votes = this.votes - 1;
+      this.requestForVotedown();
     },
     onClickUpvote: function onClickUpvote() {
-      this.isUpvoteOn = !this.isUpvoteOn;
+      this.isUpvoteOn = !this.isUpvoteOn; // assigment here too
+
       this.votes = this.votes + 1;
+      this.requestForVoteup();
     },
-    submitForm: function submitForm() {
-      axios.post('/formSubmit', {
-        name: this.name,
-        description: this.description
-      }).then(function (response) {
+    requestForVoteup: function requestForVoteup() {
+      axios.post(this.questionId + '/upvote', {}).then(function (response) {
+        console.log('form is submitted');
+        console.log(response.data);
+      })["catch"](function (error) {
+        console.log(error);
+      });
+      ;
+    },
+    requestForVotedown: function requestForVotedown() {
+      axios.post(this.questionId + '/downvote', {}).then(function (response) {
         console.log('form is submitted');
         console.log(response.data);
       })["catch"](function (error) {

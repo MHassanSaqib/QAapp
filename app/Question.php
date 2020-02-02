@@ -3,11 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
 use Carbon\Carbon;
+use Jcc\LaravelVote\CanBeVoted;
 
 class Question extends Model
 {
+    use CanBeVoted;
+
+    protected $vote = User::class;
 
     protected $guarded = [
         'user_id',

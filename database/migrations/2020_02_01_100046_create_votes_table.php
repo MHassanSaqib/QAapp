@@ -1,8 +1,7 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Migrations\Migration;
 
 class CreateVotesTable extends Migration
 {
@@ -14,10 +13,11 @@ class CreateVotesTable extends Migration
     public function up()
     {
         Schema::create('votes', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->morphs('votable');
+            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('votable_id');
+            $table->string('votable_type')->index();
+            $table->enum('type', ['up_vote', 'down_vote'])->default('up_vote');
+
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateVotesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('votes');
+        Schema::drop('votes');
     }
 }

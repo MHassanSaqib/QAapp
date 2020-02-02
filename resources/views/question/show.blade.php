@@ -9,12 +9,15 @@
                     <div class="p-4">
                         <div class="row">
                             <div class="col-2">
+
                                 <vote-component
-                                    vote-count=3
-                                    :upvote-on="false"
+                                    vote-count={{$question->countTotalVotes()}}
+                                    :upvote-on={{auth()->user()->hasUpVoted($question) ? "true" : "false"}}
                                     :star-on="false"
-                                    downvote-on>
+                                    question-id= {{$question->id}}
+                                    :downvote-on={{auth()->user()->hasDownVoted($question) ? "true" : "false"}}>
                                 </vote-component>
+
                             </div>
                             <div class="col-10">
                                 <h1>
@@ -41,20 +44,20 @@
 
                         <h2> Answers </h2>
 
-                        @foreach($question->answers as $answer)
-                            {{$answer->body}}
+                        @forelse ($question->answers as $answer)
+                            {{ $answer->body }}
                             <hr>
-                        @endforeach
+                        @empty
+                            <div class="text-center">
+                                No answer yet...
+                            </div>
+                        @endforelse
 
-
-
-                        <br><hr>
+                        <br>
                         <form method="POST" action="{{ route('answers.store') }}">
                             @include('answer._form', ['buttonName' => 'Submit Answer',
                             'question' => $question])
                         </form>
-
-
 
                     </div>
                 </div>

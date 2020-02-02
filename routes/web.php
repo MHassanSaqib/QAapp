@@ -15,9 +15,27 @@ Route::resource('answers', 'AnswerController')
         'create',
     ]);
 
+Route::post('questions/{question}/upvote', 'QuestionVoteController@upvote');
+Route::post('questions/{question}/downvote', 'QuestionVoteController@downvote');
 
-Route::post('formSubmit', function(){
-    abort(203, 'some error');
-    return request()->get('name');
+Route::get('test', function(){
+
+
+
+    $user = auth()->user();
+
+    $question = App\Question::find(1);
+
+    dd($user->hasUpVoted($question));
+
+    $user->upVote($question);
 
 });
+
+
+
+// Route::post('formSubmit', function(){
+//     abort(203, 'some error');
+//     return request()->get('name');
+
+// });

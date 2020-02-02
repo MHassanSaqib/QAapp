@@ -47,7 +47,7 @@
                   </ul>
                 </div>
                 <div class="card-body">
-                    <div class="row m-4">
+                    <div class="row mt-4">
                         <div class="col">
                             <h1 class="card-title"> {{ request()->has('type')? ucwords(request()->get('type')) : 'All'}} Questions </h1>
                         </div>
